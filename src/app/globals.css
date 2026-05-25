@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth scrollbar for the message list */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 2px;
+}
+
+/* Markdown-like formatting inside message bubbles */
+.prose-message p { margin-bottom: 0.75rem; }
+.prose-message p:last-child { margin-bottom: 0; }
+.prose-message ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 0.75rem; }
+.prose-message ol { list-style: decimal; padding-left: 1.25rem; margin-bottom: 0.75rem; }
+.prose-message li { margin-bottom: 0.25rem; }
+.prose-message strong { font-weight: 600; }
+.prose-message em { font-style: italic; }
+.prose-message h2, .prose-message h3 { font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; }
+.prose-message code { background: rgba(0,0,0,0.06); padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.9em; }
+.prose-message table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin-bottom: 0.75rem; }
+.prose-message th { border: 1px solid #e5e7eb; padding: 0.4rem 0.6rem; background: #f9fafb; font-weight: 600; text-align: left; }
+.prose-message td { border: 1px solid #e5e7eb; padding: 0.4rem 0.6rem; }
