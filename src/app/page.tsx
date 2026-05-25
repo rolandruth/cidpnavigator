@@ -170,9 +170,43 @@ export default function Home() {
     }
   };
 
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebApplication',
+        name: 'CIDP Treatment Navigator',
+        url: 'https://cidpnavigator.com',
+        applicationCategory: 'HealthApplication',
+        description:
+          'Free AI educational assistant for CIDP (Chronic Inflammatory Demyelinating Polyneuropathy) patients. Understand IVIG, Vyvgart Hytrulo, SCIg, and plasma exchange treatments, prepare neurologist questions, and navigate insurance appeals.',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        audience: { '@type': 'MedicalAudience', audienceType: 'Patient' },
+      },
+      {
+        '@type': 'MedicalWebPage',
+        name: 'CIDP Treatment Navigator',
+        url: 'https://cidpnavigator.com',
+        about: {
+          '@type': 'MedicalCondition',
+          name: 'Chronic Inflammatory Demyelinating Polyneuropathy',
+          alternateName: 'CIDP',
+          code: { '@type': 'MedicalCode', code: 'G61.81', codingSystem: 'ICD-10' },
+        },
+        audience: { '@type': 'MedicalAudience', audienceType: 'Patient' },
+        medicalAudience: 'Patient',
+        lastReviewed: '2025-05-25',
+      },
+    ],
+  };
+
   return (
     // Outer shell: full viewport height, two-column on desktop
     <div className="flex flex-col h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
 
       {/* ── Top bar: full width ── */}
       <header className="flex-none bg-white border-b border-slate-200 shadow-sm z-10">
@@ -189,6 +223,7 @@ export default function Home() {
             </div>
           </div>
           <nav className="flex items-center gap-4 text-sm text-slate-600">
+            <Link href="/faq" className="hover:text-blue-600 hidden sm:block">FAQ</Link>
             <Link href="/about" className="hover:text-blue-600 hidden sm:block">About</Link>
             <Link href="/privacy" className="hover:text-blue-600 hidden sm:block">Privacy</Link>
             <a
@@ -223,9 +258,12 @@ export default function Home() {
                 <h2 className="text-lg font-medium text-slate-700 mb-1">
                   Ask me anything about CIDP
                 </h2>
-                <p className="text-sm text-slate-500 mb-6 max-w-sm">
-                  I can help you understand treatments, prepare for appointments, and navigate insurance — grounded in clinical guidelines.
+                <p className="text-sm text-slate-500 mb-2 max-w-sm">
+                  I explain CIDP treatments (IVIG, Vyvgart Hytrulo, SCIg, plasma exchange), help you prepare neurologist questions, decode insurance denials, and find clinical trials — grounded in the 2021 EAN/PNS guideline.
                 </p>
+                <Link href="/faq" className="text-xs text-blue-600 hover:underline mb-5 block">
+                  Browse common CIDP questions →
+                </Link>
                 <div className="flex flex-col gap-2 w-full max-w-md mb-6">
                   {STARTER_QUESTIONS.map((q) => (
                     <button
@@ -305,6 +343,7 @@ export default function Home() {
                 Enter to send · Shift+Enter for new line
               </p>
               <nav className="flex gap-3 text-xs text-slate-400">
+                <Link href="/faq" className="hover:text-slate-600">FAQ</Link>
                 <Link href="/about" className="hover:text-slate-600">About</Link>
                 <Link href="/privacy" className="hover:text-slate-600">Privacy</Link>
               </nav>
@@ -341,6 +380,11 @@ export default function Home() {
             <div>
               <p className="font-semibold text-slate-800 mb-1">Resources</p>
               <ul className="space-y-1">
+                <li>
+                  <Link href="/faq" className="text-blue-600 hover:underline">
+                    CIDP FAQ — Common Questions
+                  </Link>
+                </li>
                 <li>
                   <a href="https://www.gbs-cidp.org" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                     GBS/CIDP Foundation
