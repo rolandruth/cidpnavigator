@@ -14,6 +14,14 @@ export default function CookieConsent() {
   const accept = () => {
     localStorage.setItem('cookie-consent', 'accepted');
     setVisible(false);
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', {
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+        analytics_storage: 'granted',
+      });
+    }
   };
 
   if (!visible) return null;

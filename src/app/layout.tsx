@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import CookieConsent from '@/components/CookieConsent';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 import './globals.css';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cidpnavigator.com';
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       </head>
       <body className="bg-slate-50 text-slate-900 antialiased">
+        <GoogleAnalytics />
         {children}
         <CookieConsent />
       </body>
