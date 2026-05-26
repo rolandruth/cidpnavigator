@@ -7,6 +7,7 @@ import AdUnit from '@/components/AdUnit';
 interface Message {
   role: 'user' | 'assistant';
   content: string;
+  streaming?: boolean;
 }
 
 const STARTER_QUESTIONS = [
@@ -102,6 +103,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const rafIdRef = useRef<number | null>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -138,11 +140,27 @@ export default function Home() {
         const { done, value } = await reader.read();
         if (done) break;
         accumulated += decoder.decode(value, { stream: true });
-        setMessages((prev) => [
-          ...prev.slice(0, -1),
-          { role: 'assistant', content: accumulated },
-        ]);
+        // Batch DOM updates to animation frames — prevents jerk from micro-chunks
+        if (!rafIdRef.current) {
+          rafIdRef.current = requestAnimationFrame(() => {
+            setMessages((prev) => [
+              ...prev.slice(0, -1),
+              { role: 'assistant', content: accumulated, streaming: true },
+            ]);
+            rafIdRef.current = null;
+          });
+        }
       }
+
+      // Flush any pending RAF and do the final formatted update
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+      setMessages((prev) => [
+        ...prev.slice(0, -1),
+        { role: 'assistant', content: accumulated, streaming: false },
+      ]);
     } catch (err) {
       console.error(err);
       setMessages((prev) => [
@@ -295,7 +313,15 @@ export default function Home() {
                   >
                     {msg.role === 'assistant' ? (
                       msg.content ? (
-                        <div>{formatMessage(msg.content)}</div>
+                        msg.streaming ? (
+                          // Plain text while streaming — avoids markdown flicker on partial tokens
+                          <p className="whitespace-pre-wrap leading-relaxed">
+                            {msg.content}
+                            <span className="inline-block w-0.5 h-3.5 bg-slate-400 ml-0.5 animate-pulse align-middle" />
+                          </p>
+                        ) : (
+                          <div>{formatMessage(msg.content)}</div>
+                        )
                       ) : (
                         <span className="flex gap-1 py-1">
                           <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:0ms]" />
