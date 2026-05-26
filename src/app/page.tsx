@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect, FormEvent } from 'react';
+import React, { useState, useRef, useEffect, useCallback, FormEvent } from 'react';
 import Link from 'next/link';
 import AdUnit from '@/components/AdUnit';
 
@@ -101,13 +101,23 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const mainRef = useRef<HTMLElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const rafIdRef = useRef<number | null>(null);
 
+  const scrollToBottom = useCallback(() => {
+    const el = mainRef.current;
+    if (!el) return;
+    // Only auto-scroll if the user is already near the bottom (within 150px)
+    const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
+    if (distanceFromBottom < 150) {
+      el.scrollTop = el.scrollHeight; // instant assignment — no animation to restart
+    }
+  }, []);
+
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+    scrollToBottom();
+  }, [messages, scrollToBottom]);
 
   const sendMessage = async (text: string) => {
     if (!text.trim() || isLoading) return;
@@ -269,7 +279,7 @@ export default function Home() {
         {/* Chat column */}
         <div className="flex flex-col flex-1 min-w-0">
           {/* Message list */}
-          <main className="flex-1 overflow-y-auto px-4 py-4 space-y-4 scrollbar-thin">
+          <main ref={mainRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4 scrollbar-thin">
             {messages.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center px-4">
                 <div className="text-4xl mb-4">🧠</div>
@@ -336,7 +346,6 @@ export default function Home() {
                 </div>
               ))
             )}
-            <div ref={bottomRef} />
           </main>
 
           {/* Input bar */}
