@@ -2,6 +2,27 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import AdUnit from '@/components/AdUnit';
 
+const TREATMENT_LINK_PATTERNS: Array<[RegExp, string]> = [
+  [/\bIVIG\b/, '/treatments/ivig'],
+  [/Vyvgart Hytrulo/, '/treatments/vyvgart-hytrulo'],
+  [/\bSCIg\b/, '/treatments/scig'],
+  [/plasma exchange/i, '/treatments/plasma-exchange'],
+  [/plasmapheresis/i, '/treatments/plasma-exchange'],
+  [/\bcorticosteroids\b/i, '/treatments/corticosteroids'],
+  [/\bprednisone\b/i, '/treatments/corticosteroids'],
+];
+
+function linkifyTreatments(text: string): string {
+  let result = text;
+  for (const [pattern, href] of TREATMENT_LINK_PATTERNS) {
+    result = result.replace(
+      pattern,
+      (match) => `<a href="${href}" class="text-blue-600 hover:underline font-medium">${match}</a>`
+    );
+  }
+  return result;
+}
+
 export const metadata: Metadata = {
   title: 'CIDP Frequently Asked Questions',
   description:
@@ -181,9 +202,10 @@ export default function FAQPage() {
               <h2 className="text-sm font-semibold text-slate-900 px-5 py-4 bg-slate-50 border-b border-slate-100">
                 {q}
               </h2>
-              <p className="text-sm text-slate-700 leading-relaxed px-5 py-4">
-                {a}
-              </p>
+              <p
+                className="text-sm text-slate-700 leading-relaxed px-5 py-4"
+                dangerouslySetInnerHTML={{ __html: linkifyTreatments(a) }}
+              />
             </div>
           ))}
         </div>
