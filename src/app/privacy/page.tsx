@@ -2,8 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — CIDP Treatment Navigator',
-  description: 'Privacy policy for CIDP Treatment Navigator, including how we use cookies and Google AdSense.',
+  title: 'Privacy Policy',
+  description:
+    'Privacy policy for CIDP Treatment Navigator. How we handle your data, cookies, Google AdSense, Google Analytics, and third-party services including Anthropic and OpenAI.',
+  alternates: { canonical: '/privacy' },
 };
 
 const LAST_UPDATED = 'May 25, 2025';

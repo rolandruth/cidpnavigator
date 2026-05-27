@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: '%s | CIDP Treatment Navigator',
   },
   description:
-    'Free AI educational assistant for CIDP (Chronic Inflammatory Demyelinating Polyneuropathy) patients. Understand IVIG, Vyvgart Hytrulo, SCIg, and plasma exchange treatments. Prepare neurologist questions, navigate insurance appeals, and find clinical trials — based on the 2021 EAN/PNS guidelines.',
+    'Free AI assistant for CIDP patients. Understand IVIG, Vyvgart Hytrulo, SCIg, and plasma exchange. Prepare neurologist questions, navigate insurance appeals, and find clinical trials.',
   keywords: [
     'CIDP', 'Chronic Inflammatory Demyelinating Polyneuropathy',
     'CIDP treatment', 'CIDP symptoms', 'CIDP diagnosis',

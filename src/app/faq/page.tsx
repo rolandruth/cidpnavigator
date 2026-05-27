@@ -3,9 +3,9 @@ import Link from 'next/link';
 import AdUnit from '@/components/AdUnit';
 
 export const metadata: Metadata = {
-  title: 'CIDP FAQ — Common Questions About Symptoms, Treatments, and Insurance',
+  title: 'CIDP FAQ — Symptoms, Treatments, Insurance & Trials',
   description:
-    'Answers to the most common CIDP questions: What is CIDP? How is it diagnosed? What are the treatment options (IVIG, Vyvgart Hytrulo, SCIg, plasma exchange)? How do I appeal an insurance denial? Are there clinical trials?',
+    'Answers to common CIDP questions: diagnosis criteria, IVIG vs Vyvgart Hytrulo vs SCIg, plasma exchange, insurance appeal steps, clinical trials in 2025, and questions to ask your neurologist.',
   alternates: { canonical: '/faq' },
 };
 

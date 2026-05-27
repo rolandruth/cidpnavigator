@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'About — CIDP Treatment Navigator',
+  title: 'About',
   description:
-    'Learn about the CIDP Treatment Navigator — a free educational tool helping CIDP patients understand treatments and prepare for neurologist appointments.',
+    'CIDP Treatment Navigator is a free AI assistant for CIDP patients. Learn how it works, what sources it uses, and how it can help you prepare for neurologist appointments.',
+  alternates: { canonical: '/about' },
 };
 
 export default function AboutPage() {
