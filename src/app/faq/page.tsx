@@ -3,7 +3,7 @@ import Link from 'next/link';
 import AdUnit from '@/components/AdUnit';
 
 export const metadata: Metadata = {
-  title: 'CIDP FAQ — Symptoms, Treatments, Insurance & Trials',
+  title: 'CIDP Frequently Asked Questions',
   description:
     'Answers to common CIDP questions: diagnosis criteria, IVIG vs Vyvgart Hytrulo vs SCIg, plasma exchange, insurance appeal steps, clinical trials in 2025, and questions to ask your neurologist.',
   alternates: { canonical: '/faq' },

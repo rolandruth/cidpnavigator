@@ -105,6 +105,13 @@ export default function Home() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const rafIdRef = useRef<number | null>(null);
 
+  // Auto-send question from ?q= URL param (used by Google sitelinks SearchAction)
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search).get('q');
+    if (q) sendMessage(q.trim());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const scrollToBottom = useCallback(() => {
     const el = mainRef.current;
     if (!el) return;
@@ -202,6 +209,30 @@ export default function Home() {
     '@context': 'https://schema.org',
     '@graph': [
       {
+        '@type': 'WebSite',
+        name: 'CIDP Treatment Navigator',
+        url: 'https://cidpnavigator.com',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: 'https://cidpnavigator.com/?q={search_term_string}',
+          },
+          'query-input': 'required name=search_term_string',
+        },
+      },
+      {
+        '@type': 'Organization',
+        name: 'CIDP Treatment Navigator',
+        url: 'https://cidpnavigator.com',
+        logo: 'https://cidpnavigator.com/og-image.svg',
+        contactPoint: {
+          '@type': 'ContactPoint',
+          email: 'roland.ruth@gmail.com',
+          contactType: 'customer support',
+        },
+      },
+      {
         '@type': 'WebApplication',
         name: 'CIDP Treatment Navigator',
         url: 'https://cidpnavigator.com',
@@ -223,7 +254,7 @@ export default function Home() {
         },
         audience: { '@type': 'MedicalAudience', audienceType: 'Patient' },
         medicalAudience: 'Patient',
-        lastReviewed: '2025-05-25',
+        lastReviewed: '2025-05-27',
       },
     ],
   };

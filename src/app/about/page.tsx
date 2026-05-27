@@ -64,6 +64,12 @@ export default function AboutPage() {
               <li>What clinical trials are currently enrolling</li>
               <li>Definitions of medical terms in plain language</li>
             </ul>
+            <Link
+              href="/faq"
+              className="inline-block mt-4 text-sm text-blue-600 hover:text-blue-700 font-medium hover:underline"
+            >
+              Browse 17 common CIDP questions →
+            </Link>
           </div>
 
           <div>
