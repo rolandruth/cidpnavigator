@@ -282,9 +282,9 @@ export default function Home() {
             </div>
           </div>
           <nav className="flex items-center gap-4 text-sm text-slate-600">
+            <Link href="/treatments" className="hover:text-blue-600 hidden sm:block">Treatments</Link>
             <Link href="/faq" className="hover:text-blue-600 hidden sm:block">FAQ</Link>
             <Link href="/about" className="hover:text-blue-600 hidden sm:block">About</Link>
-            <Link href="/privacy" className="hover:text-blue-600 hidden sm:block">Privacy</Link>
             <a
               href="https://www.gbs-cidp.org"
               target="_blank"
@@ -409,9 +409,9 @@ export default function Home() {
                 Enter to send · Shift+Enter for new line
               </p>
               <nav className="flex gap-3 text-xs text-slate-400">
+                <Link href="/treatments" className="hover:text-slate-600">Treatments</Link>
                 <Link href="/faq" className="hover:text-slate-600">FAQ</Link>
                 <Link href="/about" className="hover:text-slate-600">About</Link>
-                <Link href="/privacy" className="hover:text-slate-600">Privacy</Link>
               </nav>
             </div>
           </footer>
@@ -442,6 +442,16 @@ export default function Home() {
                 1-866-224-3301
               </a>
               <p className="text-slate-500 mt-0.5">GBS/CIDP Foundation Health Navigator</p>
+            </div>
+            <div>
+              <p className="font-semibold text-slate-800 mb-1">Treatments</p>
+              <ul className="space-y-1">
+                <li><Link href="/treatments/ivig" className="text-blue-600 hover:underline">IVIG for CIDP</Link></li>
+                <li><Link href="/treatments/vyvgart-hytrulo" className="text-blue-600 hover:underline">Vyvgart Hytrulo</Link></li>
+                <li><Link href="/treatments/scig" className="text-blue-600 hover:underline">SCIg — Home Therapy</Link></li>
+                <li><Link href="/treatments/plasma-exchange" className="text-blue-600 hover:underline">Plasma Exchange</Link></li>
+                <li><Link href="/treatments/corticosteroids" className="text-blue-600 hover:underline">Corticosteroids</Link></li>
+              </ul>
             </div>
             <div>
               <p className="font-semibold text-slate-800 mb-1">Resources</p>

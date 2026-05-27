@@ -127,9 +127,9 @@ export default function FAQPage() {
             <span className="font-semibold text-slate-900">CIDP Treatment Navigator</span>
           </Link>
           <nav className="flex gap-4 text-sm text-slate-600">
+            <Link href="/treatments" className="hover:text-blue-600">Treatments</Link>
             <Link href="/faq" className="hover:text-blue-600 font-medium text-blue-600">FAQ</Link>
             <Link href="/about" className="hover:text-blue-600">About</Link>
-            <Link href="/privacy" className="hover:text-blue-600">Privacy</Link>
           </nav>
         </div>
       </header>
